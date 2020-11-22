@@ -1,4 +1,4 @@
-# Awesome Todo (awesome-todo)
+# Awesome Todo 
 ・Vue+Quasar
 ・Vuex
 ・Firebase
