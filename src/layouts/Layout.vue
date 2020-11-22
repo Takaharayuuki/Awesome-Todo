@@ -1,5 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
+    <!-- ヘッダー -->
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -18,14 +19,14 @@
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
-
+   <!-- フッター -->
     <q-footer>
       <q-tabs>
         <q-route-tab v-for="nav in navs" :key="nav.label" :to="nav.to" :icon="nav.icon" :label="nav.label" />
       </q-tabs>
 
     </q-footer>
-
+    <!-- ドロワーメニュー -->
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
