@@ -1,90 +1,54 @@
 <template>
-  <q-page class="q-gutter-lg">
-  <button style="position: absolute">
-    {{ counter }}
-  </button>
-
-    <input v-model="message"
-    @keyup.esc="clearText"
-    @mouseenter="alertMessage"
-    v-autoforcus
-    :style="errorStyle"/>
-    <button @click="clearText()">clear</button>
-
-    <div>{{ message.length }}</div>
-
-    <h5
-      v-if="message.length"
-      class="border-grey" >{{ message }}</h5>
-    <h6 v-else>No Message entered</h6>
-
-    <hr>
-
-    <p>Uppercase message: {{ messageUppercase}}</p>
-    <p>Lowercase message: {{ message | messageLowercase}}</p>
+  <q-page padding>
+    <ul>
+      <Task
+        v-for="(task, index) in tasks"
+        :key="task.id"
+        :task="task"
+        :index="index" ></Task>
+    </ul>
   </q-page>
 </template>
 
 <script>
+import Task from 'components/Task.vue'
+
 export default {
   data() {
     return {
-      message: 'I Love vue.js',
-      counter: 0
-    }
-  },
-  computed: {
-     messageUppercase() {
-      return this.message.toUpperCase()
-    },
-    errorStyle() {
-      if (this.message.length > 22) {
-        return {
-          'color' : 'red',
-          'background' : 'pink'
+      tasks: [
+        {
+          id: 1,
+          name: 'Go to shop',
+          duDate: '2019/05/12',
+          dueTime: '18:30'
+        },
+        {
+          id: 2,
+          name: 'Get Banana',
+          duDate: '2019/05/13',
+          dueTime: '20:30'
+        },
+        {
+          id: 3,
+          name: 'Get Apples',
+          duDate: '2019/05/14',
+          dueTime: '16:00'
         }
-      }
+      ]
     }
   },
   methods: {
-    clearText() {
-      this.message = ""
-    },
-    handleKeyUp(e) {
-      console.log(e);
-      if(e.keyCode === 8) {
-        this.clearText()
-      } else if(e.keyCode === 13) {
-        this.alertMessage()
-      }
-    },
-    alertMessage() {
-      alert(this.message)
-    },
-  },
-  filters: {
-    messageLowercase(value) {
-      return value.toLowerCase()
+    deleteTask(index) {
+      this.tasks.splice(index,1)
     }
   },
-  directives: {
-    autoforcus: {
-      inserted(el) {
-        console.log('input inserted');
-        el.focus();
-      }
-    }
+  components: {
+    Task
   }
 }
 </script>
 
 <style>
-  .border-grey {
-    border: 1px solid grey;
-  }
 
-  .error {
-    color: red;
-    background: pink;
-  }
 </style>
