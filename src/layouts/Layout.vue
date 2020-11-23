@@ -1,22 +1,13 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh lpR fFf">
     <!-- ヘッダー -->
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
 
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title class="absolute-center">
+          Awesome Todo
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
    <!-- フッター -->
@@ -29,16 +20,18 @@
     <!-- ドロワーメニュー -->
     <q-drawer
       v-model="leftDrawerOpen"
+      :breakpoint="767"
+      :width="250"
       show-if-above
       bordered
-      content-class="bg-grey-1"
+      content-class="bg-primary"
     >
-      <q-list>
+      <q-list dark>
         <!-- ドロワータイトル -->
-        <q-item-label header class="text-grey-8">Navigation</q-item-label>
+        <q-item-label header class="text-grey-4">Navigation</q-item-label>
 
         <!-- ドロワーアイテム -->
-        <q-item v-for="nav in navs" :key="nav.label" clickable :to="nav.to">
+        <q-item v-for="nav in navs" :key="nav.label" clickable :to="nav.to" class="text-grey-4">
           <q-item-section avatar>
             <q-icon :name="nav.icon" />
           </q-item-section>
@@ -79,3 +72,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @media screen and (min-width: 768px){
+    .q-footer {
+      display: none;
+    }
+  }
+
+  .q-drawer {
+    .q-router-link--exact-active {
+      color: white !important;
+    }
+  }
+</style>
