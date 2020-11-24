@@ -3,82 +3,29 @@
     <q-list
     separator
     bordered>
-
-      <q-item
-        v-for="task in tasks"
-        :key="task.id"
-        @click="task.completed = !task.completed"
-        :class="!task.completed ? 'bg-orange-1' : 'bg-green-1'"
-        clickable
-        v-ripple>
-        <q-item-section side top>
-          <q-checkbox v-model="task.completed" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label
-            :class="{ 'text-strikethrough' : task.completed }"
-          >{{ task.name }}</q-item-label>
-        </q-item-section>
-        <q-item-section side top>
-          <div class="row">
-            <div class="column justify-center">
-              <q-icon
-                name="event"
-                size="18px"
-                class="q-mr-xs" />
-            </div>
-            <div class="column">
-              <q-item-label
-              caption
-              class="row justify-end">
-                {{ task.dueDate }}
-              </q-item-label>
-              <q-item-label
-              caption
-              class="row justify-end">
-                <small>
-                {{ task.dueTime }}
-                </small>
-              </q-item-label>
-            </div>
-          </div>
-        </q-item-section>
-      </q-item>
-
+    <task
+      v-for="(task, key) in tasks"
+      :key="key"
+      :task="task"
+      :id="key">
+    </task>
 
     </q-list>
   </q-page>
 </template>
 
 <script>
+import Task from 'src/components/Tasks/Task.vue'
+import { mapGetters } from 'vuex'
+
+
 export default {
-  data() {
-    return {
-      tasks: [
-        {
-          id: 1,
-          name: 'Go to Shop',
-          completed: false,
-          dueDate: '2020/11/24',
-          dueTime: '14:00'
-        },
-         {
-          id: 2,
-          name: 'Get banana',
-          completed: false,
-          dueDate: '2020/11/25',
-          dueTime: '16:00'
-         },
-         {
-          id: 3,
-          name: 'Get Apples',
-          completed: false,
-          dueDate: '2020/11/26',
-          dueTime: '20:00'
-        },
-      ]
-    }
+  computed: {
+    ...mapGetters('tasks', ['tasks'])
   },
+  components: {
+    'task' : require('components/Tasks/Task').default
+  }
 }
 </script>
 
