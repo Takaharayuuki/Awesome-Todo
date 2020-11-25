@@ -20,6 +20,7 @@
             v-model="taskToSubmit.name"
             label="Task name"
             :rules="[(val) => !!val || 'Field is required']"
+            autofocus
           />
         </div>
 
