@@ -1,49 +1,27 @@
 import Vue from 'vue'
+import { uid } from 'quasar'
 
 const state = {
   tasks: {
-    'ID1': {
-      name: 'Go to Shop',
-      completed: false,
-      dueDate: '2020/11/24',
-      dueTime: '14:00'
-            },
-    'ID2': {
-      name: 'Get Banana',
-      completed: false,
-      dueDate: '2020/11/25',
-      dueTime: '16:00'
-    },
-    'ID3': {
-      name: 'Get Apples',
-      completed: false,
-      dueDate: '2020/11/26',
-      dueTime: '20:00'
-    },
+    // 'ID1': {
+    //   name: 'Go to Shop',
+    //   completed: false,
+    //   dueDate: '2020/11/24',
+    //   dueTime: '14:00'
+    //         },
+    // 'ID2': {
+    //   name: 'Get Banana',
+    //   completed: false,
+    //   dueDate: '2020/11/25',
+    //   dueTime: '16:00'
+    // },
+    // 'ID3': {
+    //   name: 'Get Apples',
+    //   completed: false,
+    //   dueDate: '2020/11/26',
+    //   dueTime: '20:00'
+    // },
   }
-  // tasks: [
-  //   {
-  //     id: 1,
-  //     name: 'Go to Shop',
-  //     completed: false,
-  //     dueDate: '2020/11/24',
-  //     dueTime: '14:00'
-  //   },
-  //    {
-  //     id: 2,
-  //     name: 'Get banana',
-  //     completed: false,
-  //     dueDate: '2020/11/25',
-  //     dueTime: '16:00'
-  //    },
-  //    {
-  //     id: 3,
-  //     name: 'Get Apples',
-  //     completed: false,
-  //     dueDate: '2020/11/26',
-  //     dueTime: '20:00'
-  //   },
-  // ]
 }
 
 const mutations = {
@@ -54,8 +32,10 @@ const mutations = {
   deleteTask(state, id) {
     console.log(id);
     Vue.delete(state.tasks, id)
+  },
+  addTask(state, payload) {
+    Vue.set(state.tasks, payload.id, payload.task)
   }
-
 }
 
 const actions = {
@@ -64,6 +44,14 @@ const actions = {
   },
   deleteTask({ commit }, id) {
     commit('deleteTask', id)
+  },
+  addTask({ commit }, task) {
+    let taskId = uid()
+    let payload = {
+      id: taskId,
+      task: task,
+    }
+    commit('addTask', payload)
   }
 }
 

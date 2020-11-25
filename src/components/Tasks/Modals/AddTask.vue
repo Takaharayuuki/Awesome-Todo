@@ -76,6 +76,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data() {
     return {
@@ -85,9 +87,10 @@ export default {
         dueTime: "",
         completed: false,
       },
-    };
+    }
   },
   methods: {
+    ...mapActions('tasks', ['addTask']),
     submitForm() {
       console.log('submitForm');
       this.$refs.inputName.validate()
@@ -96,7 +99,9 @@ export default {
       }
     },
     submitTask() {
-      console.log('submitTask');
+      console.log('submit完了');
+      this.addTask(this.taskToSubmit)
+      this.$emit('close')
     }
   }
 };
