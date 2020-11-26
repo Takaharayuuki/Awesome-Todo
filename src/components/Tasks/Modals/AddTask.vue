@@ -21,13 +21,27 @@
             label="Task name"
             :rules="[(val) => !!val || 'Field is required']"
             autofocus
-          />
+          >
+            <template v-slot:append>
+              <q-icon
+                v-if="taskToSubmit.name"
+                name="close"
+                @click="taskToSubmit.name = ''"
+                class="cursor-pointer" />
+            </template>
+          </q-input>
+
         </div>
 
         <!-- 日付入力欄 -->
         <div class="row q-mb-sm">
           <q-input label="Due date" outlined v-model="taskToSubmit.dueDate">
             <template v-slot:append>
+               <q-icon
+                v-if="taskToSubmit.dueDate"
+                name="close"
+                @click="clearDueDate"
+                class="cursor-pointer" />
               <q-icon name="event" class="cursor-pointer">
                 <q-popup-proxy
                   ref="qDateProxy"
@@ -48,8 +62,13 @@
         <!-- 時間入力欄 -->
         <div v-if="taskToSubmit.dueDate" class="row q-mb-sm">
           <!-- v-if="taskToSubmit.dueDate" => 日付を入力しないと非表示にする -->
-          <q-input label="Due time" outlined v-model="taskToSubmit.dueTime">
+          <q-input label="Due time" outlined v-model="taskToSubmit.dueTime" class="col">
             <template v-slot:append>
+               <q-icon
+                v-if="taskToSubmit.dueTime"
+                name="close"
+                @click="taskToSubmit.dueTime = ''"
+                class="cursor-pointer" />
               <q-icon name="access_time" class="cursor-pointer">
                 <q-popup-proxy transition-show="scale" transition-hide="scale">
                   <q-time v-model="taskToSubmit.dueTime">
@@ -104,6 +123,10 @@ export default {
       console.log('submit完了');
       this.addTask(this.taskToSubmit)
       this.$emit('close')
+    },
+    clearDueDate() {
+      this.taskToSubmit.dueDate = ''
+      this.taskToSubmit.dueTime = ''
     }
   }
 };
