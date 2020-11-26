@@ -1,37 +1,15 @@
 <template>
   <!-- タスクの追加ダイアログ -->
   <q-card>
-    <q-card-section class="row">
-      <div class="text-h6">Add Task</div>
-      <q-space />
-      <q-btn v-close-popup flat round dense icon="close" />
-    </q-card-section>
+  <modal-header>Add Task</modal-header>
+  <!-- slotの中にAdd Taskが入る -->
 
     <!-- フォーム -->
     <q-form @submit="submitForm"  class="q-gutter-md">
       <q-card-section>
 
-        <!-- タスク名入力欄 -->
-        <div class="row q-mb-sm">
-          <q-input
-            ref="inputName"
-            class="col"
-            outlined
-            v-model="taskToSubmit.name"
-            label="Task name"
-            :rules="[(val) => !!val || 'Field is required']"
-            autofocus
-          >
-            <template v-slot:append>
-              <q-icon
-                v-if="taskToSubmit.name"
-                name="close"
-                @click="taskToSubmit.name = ''"
-                class="cursor-pointer" />
-            </template>
-          </q-input>
-
-        </div>
+      <!-- タスク名入力欄 -->
+      <modal-task-name :name.sync="taskToSubmit.name" />
 
         <!-- 日付入力欄 -->
         <div class="row q-mb-sm">
@@ -91,6 +69,7 @@
           type="submit"
           />
       </q-card-section>
+      <pre>{{ taskToSubmit }}</pre>
 
     </q-form>
   </q-card>
@@ -98,8 +77,11 @@
 
 <script>
 import { mapActions } from 'vuex'
+import ModalHeader from './Shared/ModalHeader.vue';
+import ModalTaskName from './Shared/ModalTaskName.vue';
 
 export default {
+  components: { ModalHeader, ModalTaskName },
   data() {
     return {
       taskToSubmit: {
