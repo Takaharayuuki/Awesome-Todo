@@ -11,7 +11,7 @@
     <q-form @submit="submitForm"  class="q-gutter-md">
       <q-card-section>
 
-        <!-- インプット フィールド -->
+        <!-- タスク名入力欄 -->
         <div class="row q-mb-sm">
           <q-input
             ref="inputName"
@@ -24,7 +24,7 @@
           />
         </div>
 
-        <!-- データピッカー -->
+        <!-- 日付入力欄 -->
         <div class="row q-mb-sm">
           <q-input label="Due date" outlined v-model="taskToSubmit.dueDate">
             <template v-slot:append>
@@ -45,8 +45,9 @@
           </q-input>
         </div>
 
-        <!-- タイムピッカー -->
-        <div class="row q-mb-sm">
+        <!-- 時間入力欄 -->
+        <div v-if="taskToSubmit.dueDate" class="row q-mb-sm">
+          <!-- v-if="taskToSubmit.dueDate" => 日付を入力しないと非表示にする -->
           <q-input label="Due time" outlined v-model="taskToSubmit.dueTime">
             <template v-slot:append>
               <q-icon name="access_time" class="cursor-pointer">

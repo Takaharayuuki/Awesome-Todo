@@ -13,7 +13,8 @@
         >{{ task.name }}</q-item-label
       >
     </q-item-section>
-    <q-item-section side top>
+
+    <q-item-section v-if="task.dueDate" side top>
       <div class="row">
         <div class="column justify-center">
           <q-icon name="event" size="18px" class="q-mr-xs" />
@@ -53,6 +54,7 @@ export default {
     ...mapActions('tasks', ['updateTask','deleteTask']),
 
     promptToDelete(id) {
+      // 削除確認ダイアログ
       this.$q.dialog({
         title: 'confilm',
         message: 'Realy Delete?',

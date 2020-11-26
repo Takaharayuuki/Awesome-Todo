@@ -3,7 +3,7 @@
     <!-- ヘッダー -->
     <q-header elevated>
       <q-toolbar>
-
+        <!-- タイトル -->
         <q-toolbar-title class="absolute-center">
           Awesome Todo
         </q-toolbar-title>
