@@ -32,6 +32,7 @@ import Task from "src/components/Tasks/Task.vue";
 import { mapGetters } from "vuex";
 
 export default {
+  name: 'PageTodo',
   data() {
     return {
       showAddTask: false,

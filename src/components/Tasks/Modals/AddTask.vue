@@ -12,30 +12,7 @@
       <modal-task-name :name.sync="taskToSubmit.name" />
 
         <!-- 日付入力欄 -->
-        <div class="row q-mb-sm">
-          <q-input label="Due date" outlined v-model="taskToSubmit.dueDate">
-            <template v-slot:append>
-               <q-icon
-                v-if="taskToSubmit.dueDate"
-                name="close"
-                @click="clearDueDate"
-                class="cursor-pointer" />
-              <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy
-                  ref="qDateProxy"
-                  transition-show="scale"
-                  transition-hide="scale"
-                >
-                  <q-date v-model="taskToSubmit.dueDate">
-                    <div class="row items-center justify-end">
-                      <q-btn v-close-popup label="Close" color="primary" flat />
-                    </div>
-                  </q-date>
-                </q-popup-proxy>
-              </q-icon>
-            </template>
-          </q-input>
-        </div>
+        <modal-due-date :date.sync="taskToSubmit.dueDate" @clear="clearDueDate"/>
 
         <!-- 時間入力欄 -->
         <div v-if="taskToSubmit.dueDate" class="row q-mb-sm">
@@ -69,6 +46,7 @@
           type="submit"
           />
       </q-card-section>
+
       <pre>{{ taskToSubmit }}</pre>
 
     </q-form>
@@ -79,9 +57,11 @@
 import { mapActions } from 'vuex'
 import ModalHeader from './Shared/ModalHeader.vue';
 import ModalTaskName from './Shared/ModalTaskName.vue';
+import ModalDueDate from './Shared/ModalDueDate.vue';
 
 export default {
-  components: { ModalHeader, ModalTaskName },
+  name: 'AddTask',
+  components: { ModalHeader, ModalTaskName, ModalDueDate },
   data() {
     return {
       taskToSubmit: {

@@ -49,6 +49,7 @@
 import { mapActions } from 'vuex'
 
 export default {
+  name: 'Task',
   props: ['task', 'id'],
   methods: {
     ...mapActions('tasks', ['updateTask','deleteTask']),

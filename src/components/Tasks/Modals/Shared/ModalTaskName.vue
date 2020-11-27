@@ -1,6 +1,6 @@
 <template>
 <!-- タスク名入力欄 -->
-<div class="row q-mb-sm">
+  <div class="row q-mb-sm">
     <q-input
       ref="inputName"
       class="col"
@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  name: 'ModalTaskName',
   props: [
     'name'
   ]
