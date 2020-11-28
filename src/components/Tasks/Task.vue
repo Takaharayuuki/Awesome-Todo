@@ -33,24 +33,44 @@
     </q-item-section>
 
     <q-item-section side top>
-     <q-btn
-        @click.stop="promptToDelete(id)"
-        flat
-        round
-        dense
-        color="red"
-        icon="delete" />
+      <div class="row">
+        <q-btn
+          @click.stop="showEditTask = true"
+          flat
+          round
+          dense
+          color="primary"
+          icon="edit" />
+      <q-btn
+          @click.stop="promptToDelete(id)"
+          flat
+          round
+          dense
+          color="red"
+          icon="delete" />
+      </div>
     </q-item-section>
+
+    <q-dialog v-model="showEditTask">
+      <edit-task @close="showEditTask = false" />
+      <!-- AddTask.vueの this.$emit('close') で　@close が発火してAddTaskモーダルが非表示になる -->
+    </q-dialog>
 
   </q-item>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import { EditTask } from './Modals/EditTask'
 
 export default {
   name: 'Task',
   props: ['task', 'id'],
+  data() {
+    return {
+      showEditTask: false
+    }
+  },
   methods: {
     ...mapActions('tasks', ['updateTask','deleteTask']),
 
@@ -70,6 +90,9 @@ export default {
         this.deleteTask(id)
       })
     },
+     components: {
+      EditTask
+              },
   }
 }
 </script>
