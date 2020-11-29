@@ -1,11 +1,18 @@
 <template>
   <q-page class="q-pa-md">
+
+    <tasks-todo
+    :tasksTodo="tasksTodo"
+    />
+
+    <hr>
+
     <q-list
       separator
       bordered
-      v-if="Object.keys(tasks).length" >
+      v-if="Object.keys(tasksCompleted).length" >
       <!-- Object.keys(tasks).length =>  tasksのkeyが一個もない場合表示しない -->
-      <task v-for="(task, key) in tasks" :key="key" :task="task" :id="key">
+      <task v-for="(task, key) in tasksCompleted" :key="key" :task="task" :id="key">
       </task>
     </q-list>
 
@@ -28,7 +35,6 @@
 </template>
 
 <script>
-import Task from "src/components/Tasks/Task.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -39,11 +45,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("tasks", ["tasks"]),
+    ...mapGetters("tasks", ["tasksTodo","tasksCompleted"]),
   },
   components: {
-    task: require("components/Tasks/Task").default,
+    "task": require("components/Tasks/Task").default,
     "add-task": require("components/Tasks/Modals/AddTask").default,
+    "tasks-todo": require("components/Tasks/TasksTodo").default,
   },
 };
 </script>
