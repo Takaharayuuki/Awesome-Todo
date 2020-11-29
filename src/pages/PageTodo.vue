@@ -7,14 +7,9 @@
 
     <hr>
 
-    <q-list
-      separator
-      bordered
-      v-if="Object.keys(tasksCompleted).length" >
-      <!-- Object.keys(tasks).length =>  tasksのkeyが一個もない場合表示しない -->
-      <task v-for="(task, key) in tasksCompleted" :key="key" :task="task" :id="key">
-      </task>
-    </q-list>
+    <tasks-completed
+    :tasksCompleted="tasksCompleted"
+    />
 
     <div class="absolute-bottom text-center q-mb-xl">
       <!-- タスクの追加ボタン -->
@@ -51,6 +46,7 @@ export default {
     "task": require("components/Tasks/Task").default,
     "add-task": require("components/Tasks/Modals/AddTask").default,
     "tasks-todo": require("components/Tasks/TasksTodo").default,
+    "tasks-completed": require("components/Tasks/TasksCompleted").default,
   },
 };
 </script>

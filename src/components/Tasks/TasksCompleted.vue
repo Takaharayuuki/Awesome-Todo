@@ -2,9 +2,9 @@
   <q-list
     separator
     bordered
-    v-if="Object.keys(tasksTodo).length" >
+    v-if="Object.keys(tasksCompleted).length" >
     <!-- Object.keys(tasks).length =>  tasksのkeyが一個もない場合表示しない -->
-    <task v-for="(task, key) in tasksTodo" :key="key" :task="task" :id="key">
+    <task v-for="(task, key) in tasksCompleted" :key="key" :task="task" :id="key">
     </task>
   </q-list>
 </template>
@@ -12,9 +12,9 @@
 <script>
 
 export default {
-  name: 'TasksTodo',
+  name: 'TasksCompleted',
   props: [
-    'tasksTodo'
+    'tasksCompleted'
   ],
   components: {
     task: require("components/Tasks/Task.vue").default,
