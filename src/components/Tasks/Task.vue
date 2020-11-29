@@ -6,7 +6,8 @@
     v-ripple
   >
     <q-item-section side top>
-      <q-checkbox v-model="task.completed" />
+      <q-checkbox v-model="task.completed"
+      class="no-pointer-events"/>
     </q-item-section>
     <q-item-section>
       <q-item-label :class="{ 'text-strikethrough': task.completed }"
@@ -52,8 +53,9 @@
     </q-item-section>
 
     <q-dialog v-model="showEditTask">
-      <edit-task @close="showEditTask = false" />
-      <!-- AddTask.vueの this.$emit('close') で　@close が発火してAddTaskモーダルが非表示になる -->
+      <edit-task  @close="showEditTask = false"
+      :task="task"
+      :id="id"/>
     </q-dialog>
 
   </q-item>
@@ -61,7 +63,6 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { EditTask } from './Modals/EditTask'
 
 export default {
   name: 'Task',
@@ -90,10 +91,8 @@ export default {
         this.deleteTask(id)
       })
     },
-     components: {
-      EditTask
-              },
-  }
+  },
+  components: { "edit-task": require("components/Tasks/Modals/EditTask").default, },
 }
 </script>
 

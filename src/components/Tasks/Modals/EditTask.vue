@@ -1,7 +1,7 @@
 <template>
   <!-- タスクの追加ダイアログ -->
   <q-card>
-  <modal-header>Add Task</modal-header>
+  <modal-header>Edit Task</modal-header>
   <!-- slotの中にAdd Taskが入る -->
 
     <!-- フォーム -->
@@ -24,8 +24,6 @@
       <!-- 保存ボタン -->
       <modal-buttons />
 
-      <pre>{{ taskToSubmit }}</pre>
-
     </q-form>
   </q-card>
 </template>
@@ -40,7 +38,10 @@ import ModalButtons from './Shared/ModalButtons.vue';
 
 
 export default {
-  name: 'AddTask',
+  name: 'EditTask',
+  props: [
+    'task', 'id'
+  ],
   components: {
       ModalHeader,
       ModalTaskName,
@@ -51,15 +52,11 @@ export default {
   data() {
     return {
       taskToSubmit: {
-        name: "",
-        dueDate: "",
-        dueTime: "",
-        completed: false,
       },
     }
   },
   methods: {
-    ...mapActions('tasks', ['addTask']),
+    ...mapActions('tasks', ['updateTask']),
     submitForm() {
       console.log('submitForm');
       this.$refs.modalTaskName.$refs.inputName.validate()
@@ -69,13 +66,19 @@ export default {
     },
     submitTask() {
       console.log('submit完了');
-      this.addTask(this.taskToSubmit)
+      this.updateTask({
+        id: this.id,
+        updates: this.taskToSubmit
+      })
       this.$emit('close')
     },
     clearDueDate() {
       this.taskToSubmit.dueDate = ''
       this.taskToSubmit.dueTime = ''
     }
-  }
+  },
+  mounted() {
+    this.taskToSubmit = Object.assign({}, this.task)
+  },
 };
 </script>
