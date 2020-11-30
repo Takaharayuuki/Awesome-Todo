@@ -1,20 +1,22 @@
 <template>
   <q-page class="q-pa-md">
-
+    <!-- 検索バー -->
     <div class="row q-mb-lg">
       <search/>
     </div>
 
+    <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">No search results...</p>
+
     <!-- タスクがない場合 -->
     <no-tasks
     class="q-mb-lg"
-    v-if="!Object.keys(tasksTodo).length"
+    v-if="!Object.keys(tasksTodo).length && !search"
     @showAddTask="showAddTask = true"
     />
 
     <!-- 未完了のタスク一覧 -->
     <tasks-todo
-    v-else
+    v-if="Object.keys(tasksTodo).length"
     :tasksTodo="tasksTodo"
     />
 
@@ -43,7 +45,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   name: 'PageTodo',
@@ -54,6 +56,7 @@ export default {
   },
   computed: {
     ...mapGetters("tasks", ["tasksTodo","tasksCompleted"]),
+    ...mapState('tasks',['search'])
   },
   mounted() {
     this.$root.$on('showAddTask', () => {
