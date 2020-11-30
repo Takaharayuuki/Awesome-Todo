@@ -1,12 +1,22 @@
 <template>
-  <q-list
-    separator
-    bordered
-    v-if="Object.keys(tasksTodo).length" >
-    <!-- Object.keys(tasks).length =>  tasksのkeyが一個もない場合表示しない -->
-    <task v-for="(task, key) in tasksTodo" :key="key" :task="task" :id="key">
-    </task>
-  </q-list>
+  <div class="q-mb-lg">
+    <list-header
+    bgColor="bg-orange-4"
+    >Todo</list-header>
+    <q-list
+      separator
+      bordered
+      v-if="Object.keys(tasksTodo).length" >
+       <!-- Object.keys(tasks).length =>  tasksのkeyが一個もない場合表示しない -->
+
+      <task
+        v-for="(task, key) in tasksTodo"
+        :key="key"
+        :task="task"
+        :id="key">
+      </task>
+    </q-list>
+  </div>
 </template>
 
 <script>
@@ -18,6 +28,7 @@ export default {
   ],
   components: {
     task: require("components/Tasks/Task.vue").default,
+    listHeader: require("components/Tasks/Modals/Shared/ListHeader").default,
   }
 }
 </script>
