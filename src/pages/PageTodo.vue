@@ -1,16 +1,27 @@
 <template>
   <q-page class="q-pa-md">
 
+    <!-- タスクがない場合 -->
+    <no-tasks
+    class="q-mb-lg"
+    v-if="!Object.keys(tasksTodo).length"
+    @showAddTask="showAddTask = true"
+    />
+
+    <!-- 未完了のタスク一覧 -->
     <tasks-todo
+    v-else
     :tasksTodo="tasksTodo"
     />
 
+    <!-- 済みのタスク一覧 -->
     <tasks-completed
+    v-if="Object.keys(tasksCompleted).length"
     :tasksCompleted="tasksCompleted"
     />
 
+    <!-- タスクの追加ボタン -->
     <div class="absolute-bottom text-center q-mb-xl">
-      <!-- タスクの追加ボタン -->
       <q-btn
         round
         color="primary"
@@ -40,11 +51,17 @@ export default {
   computed: {
     ...mapGetters("tasks", ["tasksTodo","tasksCompleted"]),
   },
+  mounted() {
+    this.$root.$on('showAddTask', () => {
+      this.showAddTask = true
+    })
+  },
   components: {
     "task": require("components/Tasks/Task").default,
     "add-task": require("components/Tasks/Modals/AddTask").default,
     "tasks-todo": require("components/Tasks/TasksTodo").default,
     "tasks-completed": require("components/Tasks/TasksCompleted").default,
+    "no-tasks": require("components/Tasks/NoTasks").default,
   },
 };
 </script>

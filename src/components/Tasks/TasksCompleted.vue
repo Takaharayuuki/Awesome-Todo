@@ -5,8 +5,7 @@
     >Completed</list-header>
     <q-list
       separator
-      bordered
-      v-if="Object.keys(tasksCompleted).length" >
+      bordered　>
       <!-- Object.keys(tasks).length =>  tasksのkeyが一個もない場合表示しない -->
       <task v-for="(task, key) in tasksCompleted" :key="key" :task="task" :id="key">
       </task>

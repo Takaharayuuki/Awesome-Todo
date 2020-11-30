@@ -24,8 +24,6 @@
       <!-- 保存ボタン -->
       <modal-buttons />
 
-      <pre>{{ taskToSubmit }}</pre>
-
     </q-form>
   </q-card>
 </template>
