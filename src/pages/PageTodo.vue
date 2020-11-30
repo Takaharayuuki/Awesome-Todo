@@ -1,6 +1,10 @@
 <template>
   <q-page class="q-pa-md">
 
+    <div class="row q-mb-lg">
+      <search/>
+    </div>
+
     <!-- タスクがない場合 -->
     <no-tasks
     class="q-mb-lg"
@@ -62,6 +66,7 @@ export default {
     "tasks-todo": require("components/Tasks/TasksTodo").default,
     "tasks-completed": require("components/Tasks/TasksCompleted").default,
     "no-tasks": require("components/Tasks/NoTasks").default,
+    "search": require("components/Tasks/Tools/Search").default
   },
 };
 </script>
