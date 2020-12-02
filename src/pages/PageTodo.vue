@@ -1,5 +1,6 @@
 <template>
   <q-page class="q-pa-md">
+
     <!-- 検索バー -->
     <div class="row q-mb-lg">
       <search/>
@@ -11,7 +12,6 @@
     <no-tasks
     class="q-mb-lg"
     v-if="!Object.keys(tasksTodo).length && !search"
-    @showAddTask="showAddTask = true"
     />
 
     <!-- 未完了のタスク一覧 -->
