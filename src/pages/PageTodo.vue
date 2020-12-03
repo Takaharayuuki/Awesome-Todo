@@ -4,6 +4,7 @@
     <!-- 検索バー -->
     <div class="row q-mb-lg">
       <search/>
+      <sort />
     </div>
 
     <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">No search results...</p>
@@ -69,7 +70,8 @@ export default {
     "tasks-todo": require("components/Tasks/TasksTodo").default,
     "tasks-completed": require("components/Tasks/TasksCompleted").default,
     "no-tasks": require("components/Tasks/NoTasks").default,
-    "search": require("components/Tasks/Tools/Search").default
+    "search": require("components/Tasks/Tools/Search").default,
+    "sort": require("components/Tasks/Tools/Sort").default
   },
 };
 </script>
