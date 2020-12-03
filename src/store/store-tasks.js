@@ -63,11 +63,31 @@ const actions = {
 }
 
 const getters = {
-  tasksFiltered: (state) => {
+  tasksSorted: (state) => {
+    let tasksSorted = {},
+        keysOrdered = Object.keys(state.tasks)
+
+        keysOrdered.sort((a,b) => {
+          let taskAprop = state.tasks[a].name.toLowerCase(),
+              taskBprop = state.tasks[b].name.toLowerCase()
+
+          if(taskAprop > taskBprop) return 1
+          else if (taskAprop < taskBprop) return -1
+          else return 0
+        })
+
+        keysOrdered.forEach(key => {
+          tasksSorted[key] = state.tasks[key]
+        })
+        console.log(tasksSorted);
+    return tasksSorted
+  },
+  tasksFiltered: (state, getters) => {
+    let tasksSorted = getters.tasksSorted
     let tasksFiltered = {}
     if(state.search) {
-      Object.keys(state.tasks).forEach(key => {
-        let task = state.tasks[key],
+      Object.keys(tasksSorted).forEach(key => {
+        let task = tasksSorted[key],
             taskNameLowerCase = task.name.toLowerCase(),
             searchLowerCase = state.search.toLowerCase()
         if (taskNameLowerCase.includes(searchLowerCase)) {
@@ -76,7 +96,7 @@ const getters = {
       })
       return tasksFiltered
     }
-    return state.tasks
+    return tasksSorted
   },
   tasksTodo: (state, getters) => {
     let tasksFiltered = getters.tasksFiltered
