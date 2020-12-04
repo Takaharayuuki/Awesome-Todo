@@ -2,6 +2,7 @@
   <q-input
     class="col"
     outlined
+    @keyup.esc="searchField = '' "
     v-select-all
     v-model="searchField"
     label="Search">
