@@ -3,6 +3,7 @@
     @click="updateTask({ id: id, updates: { completed: !task.completed }})"
     :class="!task.completed ? 'bg-orange-1' : 'bg-green-1'"
     clickable
+    v-touch-hold:1000.mouse="showEditTaskModal"
     v-ripple
   >
     <q-item-section side top>
@@ -36,7 +37,7 @@
     <q-item-section side top>
       <div class="row">
         <q-btn
-          @click.stop="showEditTask = true"
+          @click.stop="showEditTaskModal"
           flat
           round
           dense
@@ -74,7 +75,9 @@ export default {
   },
   methods: {
     ...mapActions('tasks', ['updateTask','deleteTask']),
-
+    showEditTaskModal() {
+      this.showEditTask = true
+    },
     promptToDelete(id) {
       // 削除確認ダイアログ
       this.$q.dialog({
