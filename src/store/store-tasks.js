@@ -28,11 +28,9 @@ const state = {
 
 const mutations = {
   updateTask(state, payload) {
-    console.log(payload);
     Object.assign(state.tasks[payload.id], payload.updates)
   },
   deleteTask(state, id) {
-    console.log(id);
     Vue.delete(state.tasks, id)
   },
   addTask(state, payload) {
@@ -86,7 +84,6 @@ const getters = {
         keysOrdered.forEach(key => {
           tasksSorted[key] = state.tasks[key]
         })
-        console.log(tasksSorted);
     return tasksSorted
   },
   tasksFiltered: (state, getters) => {
@@ -111,7 +108,6 @@ const getters = {
     let keys = Object.keys(tasksFiltered)
     keys.forEach(key => {
       let task = state.tasks[key]
-      console.log(task);
       if(!task.completed) {
         tasks[key] = task
       }
@@ -124,7 +120,6 @@ const getters = {
     let keys = Object.keys(tasksFiltered)
     keys.forEach(key => {
       let task = state.tasks[key]
-      console.log(task);
       if(task.completed) {
         tasks[key] = task
       }

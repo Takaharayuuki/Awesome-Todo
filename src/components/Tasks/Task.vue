@@ -106,8 +106,6 @@ export default {
       return date.formatDate(value, "YYYY年MM月DD日");
     },
     searchHighlight(value, search) {
-      console.log(value);
-      console.log(search);
       if (search) {
         let searchRegExp = new RegExp(search, 'i')
         return value.replace(searchRegExp, (match) => {

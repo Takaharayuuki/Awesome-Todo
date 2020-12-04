@@ -49,7 +49,6 @@ export default {
   methods: {
     ...mapActions("tasks", ["addTask"]),
     submitTask() {
-      console.log("submit完了");
       this.addTask(this.taskToSubmit);
       this.$emit("close");
     },

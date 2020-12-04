@@ -32,7 +32,6 @@ export default {
         return this.search
       },
       set(value) {
-        console.log(value);
         this.setSearch(value)
       }
     }

@@ -47,7 +47,6 @@ export default {
   methods: {
     ...mapActions('tasks', ['updateTask']),
     submitTask() {
-      console.log('submit完了');
       this.updateTask({
         id: this.id,
         updates: this.taskToSubmit

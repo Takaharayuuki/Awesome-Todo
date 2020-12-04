@@ -7,7 +7,6 @@ import ModalButtons from "../components/Tasks/Modals/Shared/ModalButtons";
 export default {
   methods: {
     submitForm() {
-      console.log("submitForm");
       this.$refs.modalTaskName.$refs.inputName.validate();
       if (!this.$refs.modalTaskName.$refs.inputName.hasError) {
         this.submitTask();
