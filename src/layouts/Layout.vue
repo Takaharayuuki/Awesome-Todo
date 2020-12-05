@@ -8,9 +8,16 @@
           Awesome Todo
         </q-toolbar-title>
 
+        <q-btn
+          to="/auth"
+          flat
+          class="absolute-right"
+          icon-right="account_circle"
+          label="ログイン" />
+
       </q-toolbar>
     </q-header>
-   <!-- フッター -->
+    <!-- フッター -->
     <q-footer>
       <q-tabs>
         <q-route-tab v-for="nav in navs" :key="nav.label" :to="nav.to" :icon="nav.icon" :label="nav.label" />
