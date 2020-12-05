@@ -13,7 +13,10 @@
     "quasar": "^1.0.0"
   },
   "devDependencies": {
-    "@quasar/app": "^2.0.0"
+    "@quasar/app": "^2.0.0",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^6.15.0",
+    "prettier": "^2.2.1"
   },
   "browserslist": [
     "last 10 Chrome versions",

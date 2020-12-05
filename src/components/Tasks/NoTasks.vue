@@ -9,17 +9,15 @@
         @click="$root.$emit('showAddTask')"
         flat
         color="primary"
-        label="add Task" />
+        label="add Task"
+      />
     </template>
   </q-banner>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
-
 </style>

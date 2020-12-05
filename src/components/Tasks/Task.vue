@@ -10,7 +10,10 @@
       <q-checkbox v-model="task.completed" class="no-pointer-events" />
     </q-item-section>
     <q-item-section>
-      <q-item-label :class="{ 'text-strikethrough': task.completed }" v-html="$options.filters.searchHighlight(task.name, search)"></q-item-label>
+      <q-item-label
+        :class="{ 'text-strikethrough': task.completed }"
+        v-html="$options.filters.searchHighlight(task.name, search)"
+      ></q-item-label>
     </q-item-section>
 
     <q-item-section v-if="task.dueDate" side top>
@@ -19,14 +22,10 @@
           <q-icon name="event" size="18px" class="q-mr-xs" />
         </div>
         <div class="column">
-          <q-item-label
-            caption
-            class="row justify-end">
+          <q-item-label caption class="row justify-end">
             {{ task.dueDate | dateFormat }}
           </q-item-label>
-          <q-item-label
-            caption
-            class="row justify-end">
+          <q-item-label caption class="row justify-end">
             <small>
               {{ task.dueTime }}
             </small>
@@ -107,9 +106,9 @@ export default {
     },
     searchHighlight(value, search) {
       if (search) {
-        let searchRegExp = new RegExp(search, 'i')
+        let searchRegExp = new RegExp(search, "i");
         return value.replace(searchRegExp, (match) => {
-          return '<span class="bg-yellow-6">' + match + '</span>'
+          return '<span class="bg-yellow-6">' + match + "</span>";
         });
       }
       return value;
