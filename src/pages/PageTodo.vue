@@ -9,23 +9,26 @@
 
     <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">No search results...</p>
 
-    <!-- タスクがない場合 -->
-    <no-tasks
-    class="q-mb-lg"
-    v-if="!Object.keys(tasksTodo).length && !search"
-    />
+    <div class="relative-position">
+      <!-- タスクがない場合 -->
+      <no-tasks
+      class="q-mb-lg"
+      v-if="!Object.keys(tasksTodo).length && !search"
+      />
 
-    <!-- 未完了のタスク一覧 -->
-    <tasks-todo
-    v-if="Object.keys(tasksTodo).length"
-    :tasksTodo="tasksTodo"
-    />
+      <!-- 未完了のタスク一覧 -->
+      <tasks-todo
+      v-if="Object.keys(tasksTodo).length"
+      :tasksTodo="tasksTodo"
+      />
 
-    <!-- 済みのタスク一覧 -->
-    <tasks-completed
-    v-if="Object.keys(tasksCompleted).length"
-    :tasksCompleted="tasksCompleted"
-    />
+      <!-- 済みのタスク一覧 -->
+      <tasks-completed
+      v-if="Object.keys(tasksCompleted).length"
+      :tasksCompleted="tasksCompleted"
+      />
+    </div>
+
 
     <!-- タスクの追加ボタン -->
     <div class="absolute-bottom text-center q-mb-xl">

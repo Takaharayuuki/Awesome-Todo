@@ -1,13 +1,19 @@
 <template>
-  <div class="q-mb-lg">
-    <list-header bgColor="bg-orange-4">Todo</list-header>
-    <q-list separator bordered>
+  <transition
+      appear
+      enter-active-class="animated zoomIn"
+      leave-active-class="animated zoomOut absolute-top"
+    >
+    <div class="q-mb-lg">
+      <list-header bgColor="bg-orange-4">Todo</list-header>
+      <q-list separator bordered>
 
-      <!-- Object.keys(tasks).length =>  tasksのkeyが一個もない場合表示しない -->
-      <task v-for="(task, key) in tasksTodo" :key="key" :task="task" :id="key">
-      </task>
-    </q-list>
-  </div>
+        <!-- Object.keys(tasks).length =>  tasksのkeyが一個もない場合表示しない -->
+        <task v-for="(task, key) in tasksTodo" :key="key" :task="task" :id="key">
+        </task>
+      </q-list>
+    </div>
+  </transition>
 </template>
 
 <script>
