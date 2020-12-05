@@ -79,7 +79,7 @@ export default {
     // 時間の表示を12時間表示に切替
     taskDueTime() {
       if(this.settings.show12HourTimeFormat) {
-        return date.formatDate(this.task.dueDate + ' ' + this.task.dueTime , 'h:mmA') // スペース忘れない!!(undefindになる)
+        return date.formatDate(this.task.dueDate + ' ' + this.task.dueTime , 'h:mm A') // ' 'スペース忘れない!!(undefindになる)
       }
       return this.task.dueTime
     }
