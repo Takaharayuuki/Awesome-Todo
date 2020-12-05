@@ -21,6 +21,78 @@ const state = {
       dueDate: '2020/11/26',
       dueTime: '20:00'
     },
+    'ID4': {
+      name: 'Go to Shop',
+      completed: false,
+      dueDate: '2020/11/24',
+      dueTime: '14:00'
+            },
+    'ID5': {
+      name: 'Get Banana',
+      completed: false,
+      dueDate: '2020/11/25',
+      dueTime: '16:00'
+    },
+    'ID6': {
+      name: 'Get Apples',
+      completed: false,
+      dueDate: '2020/11/26',
+      dueTime: '20:00'
+    },
+    'ID7': {
+      name: 'Go to Shop',
+      completed: false,
+      dueDate: '2020/11/24',
+      dueTime: '14:00'
+            },
+    'ID8': {
+      name: 'Get Banana',
+      completed: false,
+      dueDate: '2020/11/25',
+      dueTime: '16:00'
+    },
+    'ID9': {
+      name: 'Get Apples',
+      completed: false,
+      dueDate: '2020/11/26',
+      dueTime: '20:00'
+    },
+    'ID10': {
+      name: 'Go to Shop',
+      completed: false,
+      dueDate: '2020/11/24',
+      dueTime: '14:00'
+            },
+    'ID11': {
+      name: 'Get Banana',
+      completed: false,
+      dueDate: '2020/11/25',
+      dueTime: '16:00'
+    },
+    'ID12': {
+      name: 'Get Apples',
+      completed: false,
+      dueDate: '2020/11/26',
+      dueTime: '20:00'
+    },
+    'ID13': {
+      name: 'Go to Shop',
+      completed: false,
+      dueDate: '2020/11/24',
+      dueTime: '14:00'
+            },
+    'ID14': {
+      name: 'Get Banana',
+      completed: false,
+      dueDate: '2020/11/25',
+      dueTime: '16:00'
+    },
+    'ID15': {
+      name: 'Get Apples',
+      completed: false,
+      dueDate: '2020/11/26',
+      dueTime: '20:00'
+    },
   },
   search: '',
   sort: 'dueDate'
