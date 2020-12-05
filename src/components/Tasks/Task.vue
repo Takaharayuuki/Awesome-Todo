@@ -76,10 +76,10 @@ export default {
   computed: {
     ...mapState("tasks", ["search"]),
     ...mapGetters('settings',['settings']),
-    // 時間の表示を12時間表示に切替
+    //? 時間の表示を12時間表示に切替
     taskDueTime() {
       if(this.settings.show12HourTimeFormat) {
-        return date.formatDate(this.task.dueDate + ' ' + this.task.dueTime , 'h:mm A') // ' 'スペース忘れない!!(undefindになる)
+        return date.formatDate(this.task.dueDate + ' ' + this.task.dueTime , 'h:mm A') //? ' 'スペース忘れない!!(undefindになる)
       }
       return this.task.dueTime
     }
@@ -90,7 +90,7 @@ export default {
       this.showEditTask = true;
     },
     promptToDelete(id) {
-      // 削除確認ダイアログ
+      //? 削除確認ダイアログ
       this.$q
         .dialog({
           title: "confilm",

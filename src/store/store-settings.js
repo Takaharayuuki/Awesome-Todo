@@ -29,10 +29,10 @@ const actions = {
     dispatch('saveSettings')
   },
   saveSettings({ state}) {
-    LocalStorage.set('settings', state.settings) // ローカルストレージにstate.settingsの値を settings という名前で保存する
+    LocalStorage.set('settings', state.settings) //* ローカルストレージにstate.settingsの値を settings という名前で保存する
   },
   getSettings({ commit }) {
-    let settings = LocalStorage.getItem('settings') // ローカルストレージのsettings を持ってくる
+    let settings = LocalStorage.getItem('settings') //* ローカルストレージのsettings を持ってくる
     if(settings) {
       commit('setSettings', settings)
     }
