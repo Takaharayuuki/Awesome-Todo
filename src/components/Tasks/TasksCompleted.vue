@@ -5,7 +5,7 @@
     leave-active-class="animated zoomOut"
   >
     <div>
-      <list-header bgColor="bg-green-4">Completed</list-header>
+      <list-header v-if="!settings.showTasksInOneList" bgColor="bg-green-4">Completed</list-header>
       <q-list separator bordered>
         <!-- Object.keys(tasks).length =>  tasksのkeyが一個もない場合表示しない -->
         <task
@@ -21,9 +21,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: "TasksCompleted",
   props: ["tasksCompleted"],
+  computed: {
+    ...mapGetters('settings',['settings'])
+  },
   components: {
     task: require("components/Tasks/Task.vue").default,
     listHeader: require("components/Tasks/Modals/Shared/ListHeader").default,

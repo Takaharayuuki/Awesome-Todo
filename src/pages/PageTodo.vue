@@ -14,7 +14,7 @@
         <!-- タスクがない場合 -->
         <no-tasks
         class="q-mb-lg"
-        v-if="!Object.keys(tasksTodo).length && !search"
+        v-if="!Object.keys(tasksTodo).length && !search && !settings.showTasksInOneList"
         />
 
         <!-- 未完了のタスク一覧 -->
@@ -65,6 +65,7 @@ export default {
   },
   computed: {
     ...mapGetters("tasks", ["tasksTodo","tasksCompleted"]),
+    ...mapGetters("settings", ["settings"]),
     ...mapState('tasks',['search'])
   },
   mounted() {
