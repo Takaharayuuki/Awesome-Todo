@@ -13,6 +13,7 @@
   <div class="row q-mb-sm">
     <q-input
     class="col"
+    type="email"
     outlined
     ref="email"
     v-model="formData.email"

@@ -4,9 +4,7 @@
     <q-header elevated>
       <q-toolbar>
         <!-- タイトル -->
-        <q-toolbar-title class="absolute-center">
-          高原 Todo
-        </q-toolbar-title>
+        <q-toolbar-title class="absolute-center"> 高原 Todo </q-toolbar-title>
 
         <q-btn
           v-if="!loggedIn"
@@ -14,7 +12,8 @@
           flat
           class="absolute-right"
           icon-right="account_circle"
-          label="ログイン" />
+          label="ログイン"
+        />
 
         <q-btn
           v-else
@@ -22,21 +21,21 @@
           flat
           class="absolute-right"
           icon-right="account_circle"
-          label="ログアウト" />
-
+          label="ログアウト"
+        />
       </q-toolbar>
     </q-header>
     <!-- フッター -->
     <q-footer>
       <q-tabs>
-       <q-route-tab
+        <q-route-tab
           v-for="nav in navs"
           :key="nav.label"
           :to="nav.to"
           :icon="nav.icon"
-          :label="nav.label" />
+          :label="nav.label"
+        />
       </q-tabs>
-
     </q-footer>
     <!-- ドロワーメニュー -->
     <q-drawer
@@ -49,9 +48,7 @@
     >
       <q-list dark>
         <!-- ドロワータイトル -->
-       <q-item-label
-          header
-          class="text-grey-4">Navigation</q-item-label>
+        <q-item-label header class="text-grey-4">Navigation</q-item-label>
 
         <!-- ドロワーアイテム -->
         <q-item
@@ -59,7 +56,8 @@
           :key="nav.label"
           clickable
           :to="nav.to"
-          class="text-grey-4">
+          class="text-grey-4"
+        >
           <q-item-section avatar>
             <q-icon :name="nav.icon" />
           </q-item-section>
@@ -67,7 +65,6 @@
             <q-item-label>{{ nav.label }}</q-item-label>
           </q-item-section>
         </q-item>
-
       </q-list>
     </q-drawer>
 
@@ -78,46 +75,57 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "vuex";
 
 export default {
-  name: 'Layout',
-  data () {
+  name: "Layout",
+  data() {
     return {
       leftDrawerOpen: false,
       navs: [
         {
-          label: 'Todo',
-          icon: 'list',
-          to: '/'
+          label: "Todo",
+          icon: "list",
+          to: "/",
         },
         {
-          label: 'Settings',
-          icon: 'settings',
-          to: '/settings'
+          label: "Settings",
+          icon: "settings",
+          to: "/settings",
         },
-      ]
-    }
+      ],
+    };
   },
   computed: {
-    ...mapState('auth',['loggedIn'])
+    ...mapState("auth", ["loggedIn"]),
   },
   methods: {
-    ...mapActions('auth',['logoutUser'])
+    ...mapActions("auth", ["logoutUser"]),
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  @media screen and (min-width: 768px){
-    .q-footer {
-      display: none;
-    }
+@media screen and (min-width: 768px) {
+  .q-footer {
+    display: none;
   }
+}
 
-  .q-drawer {
-    .q-router-link--exact-active {
-      color: white !important;
-    }
+.q-drawer {
+  .q-router-link--exact-active {
+    color: white !important;
   }
+}
+
+.platform-ios {
+  .q-header {
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+  }
+  .q-footer {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
 </style>

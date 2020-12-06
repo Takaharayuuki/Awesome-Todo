@@ -106,7 +106,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .text-strikethrough {
   text-decoration: line-through;
 }
@@ -114,5 +114,8 @@ export default {
 .q-scroll-area-tasks {
   display: flex;
   flex-grow: 1;
+  .mobile & {
+    flex-basis: 100px;
+  }
 }
 </style>
