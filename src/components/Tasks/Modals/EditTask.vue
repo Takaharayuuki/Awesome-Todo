@@ -5,14 +5,20 @@
   <!-- slotの中にAdd Taskが入る -->
 
     <!-- フォーム -->
-    <q-form @submit="submitForm"  class="q-gutter-md">
+    <q-form
+      @submit="submitForm"
+      class="q-gutter-md">
       <q-card-section>
 
       <!-- タスク名入力欄 -->
-      <modal-task-name :name.sync="taskToSubmit.name" ref="modalTaskName" />
+     <modal-task-name
+        :name.sync="taskToSubmit.name"
+        ref="modalTaskName" />
 
         <!-- 日付入力欄 -->
-        <modal-due-date :dueDate.sync="taskToSubmit.dueDate" @clear="clearDueDate"/>
+       <modal-due-date
+          :dueDate.sync="taskToSubmit.dueDate"
+          @clear="clearDueDate" />
 
         <!-- 時間入力欄 -->
         <modal-due-time

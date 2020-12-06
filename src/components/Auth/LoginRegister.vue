@@ -71,7 +71,7 @@ import { mapActions } from 'vuex'
           if(this.tab == 'login') {
             this.loginUser(this.formData)
           } else {
-           this.registerUser(this.formData)
+            this.registerUser(this.formData)
           }
         }
       },

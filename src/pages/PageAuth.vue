@@ -10,13 +10,17 @@
       align="justify"
       narrow-indicator
     >
-      <q-tab name="login" label="ログイン" />
+     <q-tab
+        name="login"
+        label="ログイン" />
       <q-tab name="register" label="会員登録" />
     </q-tabs>
 
     <q-separator />
 
-    <q-tab-panels v-model="tab" animated>
+    <q-tab-panels
+      v-model="tab"
+      animated>
       <q-tab-panel name="login">
         <login-register :tab="tab" />
       </q-tab-panel>

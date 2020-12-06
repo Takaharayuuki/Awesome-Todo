@@ -29,7 +29,12 @@
     <!-- フッター -->
     <q-footer>
       <q-tabs>
-        <q-route-tab v-for="nav in navs" :key="nav.label" :to="nav.to" :icon="nav.icon" :label="nav.label" />
+       <q-route-tab
+          v-for="nav in navs"
+          :key="nav.label"
+          :to="nav.to"
+          :icon="nav.icon"
+          :label="nav.label" />
       </q-tabs>
 
     </q-footer>
@@ -44,10 +49,17 @@
     >
       <q-list dark>
         <!-- ドロワータイトル -->
-        <q-item-label header class="text-grey-4">Navigation</q-item-label>
+       <q-item-label
+          header
+          class="text-grey-4">Navigation</q-item-label>
 
         <!-- ドロワーアイテム -->
-        <q-item v-for="nav in navs" :key="nav.label" clickable :to="nav.to" class="text-grey-4">
+        <q-item
+          v-for="nav in navs"
+          :key="nav.label"
+          clickable
+          :to="nav.to"
+          class="text-grey-4">
           <q-item-section avatar>
             <q-icon :name="nav.icon" />
           </q-item-section>

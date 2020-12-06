@@ -1,31 +1,44 @@
 <template>
-  <q-item
-    @click="updateTask({ id: id, updates: { completed: !task.completed } })"
-    :class="!task.completed ? 'bg-orange-1' : 'bg-green-1'"
-    clickable
-    v-touch-hold:1000.mouse="showEditTaskModal"
-    v-ripple
-  >
-    <q-item-section side top>
-      <q-checkbox v-model="task.completed" class="no-pointer-events" />
+ <q-item
+   @click="updateTask({ id: id, updates: { completed: !task.completed } })"
+   :class="!task.completed ? 'bg-orange-1' : 'bg-green-1'"
+   clickable
+   v-touch-hold:1000.mouse="showEditTaskModal"
+   v-ripple>
+   <q-item-section
+      side
+      top>
+     <q-checkbox
+        v-model="task.completed"
+        class="no-pointer-events" />
     </q-item-section>
     <q-item-section>
       <q-item-label
         :class="{ 'text-strikethrough': task.completed }"
         v-html="$options.filters.searchHighlight(task.name, search)"
-      ></q-item-label>
+        ></q-item-label>
     </q-item-section>
 
-    <q-item-section v-if="task.dueDate" side top>
+  <q-item-section
+      v-if="task.dueDate"
+      side
+      top>
       <div class="row">
         <div class="column justify-center">
-          <q-icon name="event" size="18px" class="q-mr-xs" />
+         <q-icon
+            name="event"
+            size="18px"
+            class="q-mr-xs" />
         </div>
         <div class="column">
-          <q-item-label caption class="row justify-end">
+          <q-item-label
+            caption
+            class="row justify-end">
             {{ task.dueDate | dateFormat }}
           </q-item-label>
-          <q-item-label caption class="row justify-end">
+         <q-item-label
+            caption
+            class="row justify-end">
             <small>
               {{ taskDueTime }}
             </small>
