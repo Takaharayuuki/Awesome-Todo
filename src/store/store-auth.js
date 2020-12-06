@@ -37,13 +37,14 @@ const actions = {
     firebaseAuth.signOut()
     console.log('test');
   },
-  handleAuthStateChange({ commit }) { //? ログイン状態の保持 FirebaseAPI Auth => メソッド onAuthStateChanged
+  handleAuthStateChange({ commit,dispatch }) { //? ログイン状態の保持 FirebaseAPI Auth => メソッド onAuthStateChanged
     firebaseAuth.onAuthStateChanged(user => {
       Loading.hide()
       if (user) {
         commit('setLoggedIn', true)
         LocalStorage.set('loggedIn', true)
         this.$router.push('/', ()=>{})
+        dispatch('tasks/fbReadData', null, { root: true })
       }
       else {
         commit('setLoggedIn', false)

@@ -1,26 +1,10 @@
 import Vue from 'vue'
 import { uid } from 'quasar'
+import { firebaseDb, firebaseAuth } from 'boot/firebase'
 
 const state = {
   tasks: {
-    'ID1': {
-      name: 'Go to Shop',
-      completed: false,
-      dueDate: '2020/11/24',
-      dueTime: '14:00'
-            },
-    'ID2': {
-      name: 'Get Banana',
-      completed: false,
-      dueDate: '2020/11/25',
-      dueTime: '16:00'
-    },
-    'ID3': {
-      name: 'Get Apples',
-      completed: false,
-      dueDate: '2020/11/26',
-      dueTime: '20:00'
-    },
+
   },
   search: '',
   sort: 'dueDate'
@@ -64,6 +48,38 @@ const actions = {
   },
   setSort({ commit }, value) {
     commit('setSort', value)
+  },
+
+  fbReadData({ commit }) { //? Firebaseからの読み取り
+    let userId = firebaseAuth.currentUser.uid
+    let userTasks = firebaseDb.ref('tasks/' + userId)
+
+    //* タスクの追加時
+    userTasks.on('child_added', snapshot => {
+      let task = snapshot.val()
+
+      let payload = {
+        id: snapshot.key,
+        task: task
+      }
+      commit('addTask', payload)
+    })
+
+    //* タスクの編集時
+    userTasks.on('child_changed', snapshot => {
+      let task = snapshot.val()
+      let payload = {
+        id: snapshot.key,
+        updates: task
+      }
+      commit('updateTask', payload)
+    })
+
+    //* タスクの削除時
+    userTasks.on('child_removed', snapshot => {
+      let taskId = snapshot.key
+      commit('deleteTask', taskId)
+    })
   }
 }
 
