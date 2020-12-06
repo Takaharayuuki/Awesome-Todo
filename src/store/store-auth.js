@@ -1,4 +1,4 @@
-import { LocalStorage } from 'quasar'
+import { LocalStorage, Loading } from 'quasar'
 import { firebaseAuth } from 'boot/firebase'
 import { showErrorMessage } from 'src/functions/function-show-error-message'
 
@@ -14,6 +14,7 @@ const mutations = {
 
 const actions = {
   registerUser({}, payload) { //? 新規会員登録機能 FirebaseAPI Auth => メソッド createUserWithEmailAndPassword
+    Loading.show()
     firebaseAuth.createUserWithEmailAndPassword(payload.email, payload.password)
     .then(response => {
       console.log(response);
@@ -23,6 +24,7 @@ const actions = {
     })
   },
   loginUser({}, payload) { //? ログイン機能 FirebaseAPI Auth => メソッド signInWithEmailAndPassword
+    Loading.show()
     firebaseAuth.signInWithEmailAndPassword(payload.email, payload.password)
     .then(response => {
       console.log(response);
@@ -37,6 +39,7 @@ const actions = {
   },
   handleAuthStateChange({ commit }) { //? ログイン状態の保持 FirebaseAPI Auth => メソッド onAuthStateChanged
     firebaseAuth.onAuthStateChanged(user => {
+      Loading.hide()
       if (user) {
         commit('setLoggedIn', true)
         LocalStorage.set('loggedIn', true)
