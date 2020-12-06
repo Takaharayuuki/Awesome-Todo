@@ -1,5 +1,6 @@
 import { LocalStorage } from 'quasar'
 import { firebaseAuth } from 'boot/firebase'
+import { showErrorMessage } from 'src/functions/function-show-error-message'
 
 const state = {
   loggedIn: false
@@ -18,7 +19,7 @@ const actions = {
       console.log(response);
     })
     .catch(error => {
-      console.log('error.message:', error.message);
+      showErrorMessage(error.message) //? エラーダイアログを使用してエラーを表示
     })
   },
   loginUser({}, payload) { //? ログイン機能 FirebaseAPI Auth => メソッド signInWithEmailAndPassword
@@ -27,7 +28,7 @@ const actions = {
       console.log(response);
     })
     .catch(error => {
-      console.log('error.message:', error.message);
+      showErrorMessage(error.message) //? エラーダイアログを使用してエラーを表示
     })
   },
   logoutUser() { //? ログアウト機能 FirebaseAPI Auth => メソッド signOut
