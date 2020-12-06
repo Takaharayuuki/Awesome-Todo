@@ -1,3 +1,4 @@
+import { LocalStorage } from 'quasar'
 import { firebaseAuth } from 'boot/firebase'
 
 const state = {
@@ -11,7 +12,7 @@ const mutations = {
 }
 
 const actions = {
-  registerUser({}, payload) { //? 新規会員登録機能
+  registerUser({}, payload) { //? 新規会員登録機能 FirebaseAPI Auth => メソッド createUserWithEmailAndPassword
     firebaseAuth.createUserWithEmailAndPassword(payload.email, payload.password)
     .then(response => {
       console.log(response);
@@ -20,7 +21,7 @@ const actions = {
       console.log('error.message:', error.message);
     })
   },
-  loginUser({}, payload) { //? ログイン機能
+  loginUser({}, payload) { //? ログイン機能 FirebaseAPI Auth => メソッド signInWithEmailAndPassword
     firebaseAuth.signInWithEmailAndPassword(payload.email, payload.password)
     .then(response => {
       console.log(response);
@@ -29,13 +30,21 @@ const actions = {
       console.log('error.message:', error.message);
     })
   },
-  handleAuthStateChange({ commit }) { //? ログイン状態の保持 Auth =>
-    firebaseAuth.onAuthStateChanged(function(user) {
+  logoutUser() { //? ログアウト機能 FirebaseAPI Auth => メソッド signOut
+    firebaseAuth.signOut()
+    console.log('test');
+  },
+  handleAuthStateChange({ commit }) { //? ログイン状態の保持 FirebaseAPI Auth => メソッド onAuthStateChanged
+    firebaseAuth.onAuthStateChanged(user => {
       if (user) {
         commit('setLoggedIn', true)
+        LocalStorage.set('loggedIn', true)
+        this.$router.push('/', ()=>{})
       }
       else {
         commit('setLoggedIn', false)
+        LocalStorage.set('loggedIn', false)
+        this.$router.replace('/auth', () => {})
       }
     })
   }
