@@ -1,13 +1,15 @@
 import Vue from 'vue'
-import { uid } from 'quasar'
+import { uid , Notify } from 'quasar'
 import { firebaseDb, firebaseAuth } from 'boot/firebase'
+import { showErrorMessage } from 'src/functions/function-show-error-message'
 
 const state = {
   tasks: {
 
   },
   search: '',
-  sort: 'dueDate'
+  sort: 'dueDate',
+  tasksDownloaded: false
 }
 
 const mutations = {
@@ -20,11 +22,17 @@ const mutations = {
   addTask(state, payload) {
     Vue.set(state.tasks, payload.id, payload.task)
   },
+  clearTasks(state) {
+    state.tasks = {}
+  },
   setSearch(state, value) {
     state.search = value
   },
   setSort(state, value) {
     state.sort = value
+  },
+  tasksDownloaded(state, value) {
+    state.tasksDownloaded = value
   }
 }
 
@@ -49,10 +57,21 @@ const actions = {
   setSort({ commit }, value) {
     commit('setSort', value)
   },
+  tasksDownloaded({ commit }, value) {
+    commit('tasksDownloaded', value)
+  },
 
   fbReadData({ commit }) { //? Firebaseからの読み取り
     let userId = firebaseAuth.currentUser.uid
     let userTasks = firebaseDb.ref('tasks/' + userId)
+
+    //* データ読み込み開始時
+    userTasks.once('value', snapshot => {
+      commit('tasksDownloaded', true)
+    }, error => {
+      showErrorMessage(error.message)
+      this.$router.replace('/auth', () => {})
+    })
 
     //* タスクの追加時
     userTasks.on('child_added', snapshot => {
@@ -83,17 +102,38 @@ const actions = {
   fbAddTask({}, payload) {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
-    taskRef.set(payload.task)
+    taskRef.set(payload.task, error => {
+      if(error){
+        showErrorMessage(error.message)
+      } else {
+        Notify.create('保存を完了しました')
+      }
+    })
   },
   fbUpdateTask({}, payload) {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
-    taskRef.update(payload.updates)
+    taskRef.update(payload.updates, error => {
+      if(error) {
+        showErrorMessage(error.message)
+      } else {
+        let keys = Object.keys(payload.updates)
+        if(!(keys.includes('completed') && keys.length == 1)){
+          Notify.create('編集を完了しました')
+        }
+      }
+    })
   },
   fbDeleteTask({}, taskId) {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId + '/' + taskId)
-    taskRef.remove()
+    taskRef.remove(error => {
+      if(error) {
+        showErrorMessage(error.message)
+      } else {
+        Notify.create('削除を完了しました')
+      }
+    })
   },
 }
 
