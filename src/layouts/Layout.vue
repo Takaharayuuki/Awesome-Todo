@@ -4,7 +4,7 @@
     <q-header elevated>
       <q-toolbar>
         <!-- タイトル -->
-        <q-toolbar-title class="absolute-center"> 高原 Todo </q-toolbar-title>
+        <q-toolbar-title class="absolute-center"> Awesome Todo </q-toolbar-title>
 
         <q-btn
           v-if="!loggedIn"
